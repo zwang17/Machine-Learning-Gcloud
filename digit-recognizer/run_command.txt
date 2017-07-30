@@ -1,0 +1,10 @@
+gcloud ml-engine jobs submit training ${JOB_NAME} \
+--package-path digit-recognizer/ \
+--staging-bucket $STAGING_BUCKET \
+--module-name digit-recognizer.trainer \
+--region $REGION \
+--scale-tier BASIC_GPU \
+-- \
+--input_dir $INPUT_PATH \
+--output_dir $OUTPUT_PATH \
+--train_steps $TRAIN_STEPS
