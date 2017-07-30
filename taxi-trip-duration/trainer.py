@@ -124,7 +124,7 @@ def run_training(input_data):
 
 
 def main(_):
-    run_training('train_1.pickle')
+    run_training('train.pickle')
 
 if __name__=='__main__':
     tf.app.run()
