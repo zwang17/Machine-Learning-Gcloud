@@ -120,7 +120,7 @@ def run_training(input_data):
                 print("Final Validation error: %.5f" % v_e)
 
         saver = tf.train.Saver()
-        checkpoint_file = os.path.join(FLAGS.output_dir, 'checkpoint-{}'.format(input_data))
+        checkpoint_file = os.path.join(FLAGS.output_dir, '{}/checkpoint'.format(input_data))
         saver.save(session, checkpoint_file, global_step=step)
 
 
