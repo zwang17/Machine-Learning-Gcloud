@@ -10,7 +10,8 @@ flags = tf.app.flags
 FLAGS = flags.FLAGS
 flags.DEFINE_string('input_dir', 'input', 'Input Directory.')
 flags.DEFINE_string('output_dir','output','Output Directory.')
-flags.DEFINE_integer('train_steps', 10000, 'Train Steps.')
+flags.DEFINE_string('input_train_data','train_data','Input Training Data File Name.')
+flags.DEFINE_integer('train_steps', 100000, 'Train Steps.')
 
 def run_training(input_data):
     pickle_file = os.path.join(FLAGS.input_dir, input_data)
@@ -125,7 +126,7 @@ def run_training(input_data):
 
 
 def main(_):
-    run_training('train.pickle')
+    run_training(FLAGS.input_train_data)
 
 if __name__=='__main__':
     tf.app.run()

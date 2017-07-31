@@ -7,4 +7,5 @@ gcloud ml-engine jobs submit training ${JOB_NAME} \
 -- \
 --input_dir $INPUT_PATH \
 --output_dir $OUTPUT_PATH \
+--input_train_data $INPUT_DATA \
 --train_steps $TRAIN_STEPS \

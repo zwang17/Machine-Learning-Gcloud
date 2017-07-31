@@ -12,7 +12,7 @@ flags.DEFINE_string('input_dir', 'input', 'Input Directory.')
 flags.DEFINE_string('output_dir','output','Output Directory.')
 flags.DEFINE_string('input_test_file','input_test','Input File Name.')
 flags.DEFINE_string('train_data_file','input_data','Corresponding Training Data File Name.')
-flags.DEFINE_integer('train_steps', 10000, 'Train Steps.')
+flags.DEFINE_integer('train_steps', 100000, 'Train Steps.')
 
 def run_testing(input_test_data):
     pickle_file = os.path.join(FLAGS.input_dir, input_test_data)
