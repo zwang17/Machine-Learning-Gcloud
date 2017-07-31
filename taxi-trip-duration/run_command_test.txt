@@ -1,0 +1,12 @@
+gcloud ml-engine jobs submit training ${JOB_NAME} \
+--package-path taxi-trip-duration/ \
+--staging-bucket $STAGING_BUCKET \
+--module-name taxi-trip-duration.tester \
+--region $REGION \
+--scale-tier BASIC_GPU \
+-- \
+--input_dir $INPUT_PATH \
+--output_dir $OUTPUT_PATH \
+--train_steps $TRAIN_STEPS \
+--input_test_file $INPUT_TEST \
+--train_data_file $TRAIN_DATA 
