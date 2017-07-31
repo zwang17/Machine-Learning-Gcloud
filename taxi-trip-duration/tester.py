@@ -17,9 +17,7 @@ flags.DEFINE_integer('train_steps', 100000, 'Train Steps.')
 def run_testing(input_test_data):
     pickle_file = os.path.join(FLAGS.input_dir, input_test_data)
     with file_io.FileIO(pickle_file, 'r') as f:
-      u = pickle._Unpickler(f)
-      u.encoding = 'latin1'
-      save = u.load()
+      save = pickle.load(f)
       test_dataset = save['test_dataset']
       del save
       print('Test set', test_dataset.shape)
