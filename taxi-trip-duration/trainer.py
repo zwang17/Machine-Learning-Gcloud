@@ -16,7 +16,9 @@ flags.DEFINE_integer('train_steps', 100000, 'Train Steps.')
 def run_training(input_data):
     pickle_file = os.path.join(FLAGS.input_dir, input_data)
     with file_io.FileIO(pickle_file, 'r') as f:
-      save = pickle.load(f)
+      u = pickle._Unpickler(f)
+      u.encoding = 'latin1'
+      save = u.load()
       train_dataset = save['train_dataset']
       train_labels = save['train_labels']
       valid_dataset = save['valid_dataset']
