@@ -12,8 +12,10 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string('input_dir', 'input', 'Input Directory.')
 flags.DEFINE_string('output_dir','output','Output Directory.')
 flags.DEFINE_integer('train_steps', 10000, 'Train Steps.')
+flags.DEFINE_integer('learning_rate', 0.001, 'Training Learning Rate.')
 
-pickle_file = os.path.join(FLAGS.input_dir, 'train.pickle');
+
+pickle_file = os.path.join(FLAGS.input_dir, 'train.pickle')
 with file_io.FileIO(pickle_file, 'r') as f:
     save = pickle.load(f)
     train_dataset = save['train_dataset']
@@ -97,7 +99,7 @@ def run_training():
             tf.nn.softmax_cross_entropy_with_logits(labels=tf_train_labels, logits=logits))
 
         # Optimizer.
-        optimizer = tf.train.GradientDescentOptimizer(0.001).minimize(loss)
+        optimizer = tf.train.GradientDescentOptimizer(FLAGS.learning_rate).minimize(loss)
 
         # Predictions for the training, validation, and test data.
         train_prediction = tf.nn.softmax(logits)

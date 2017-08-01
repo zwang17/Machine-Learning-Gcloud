@@ -12,6 +12,7 @@ flags.DEFINE_string('input_dir', 'input', 'Input Directory.')
 flags.DEFINE_string('output_dir','output','Output Directory.')
 flags.DEFINE_string('input_train_data','train_data','Input Training Data File Name.')
 flags.DEFINE_integer('train_steps', 100000, 'Train Steps.')
+flags.DEFINE_integer('learning_rate', 0.00001, 'Training Learning Rate.')
 
 def run_training(input_data):
     pickle_file = os.path.join(FLAGS.input_dir, input_data)
@@ -50,7 +51,7 @@ def run_training(input_data):
     n_nodes_hl2 = 2048
 
     batch_size = 100
-    learning_rate = 0.00005
+    learning_rate = FLAGS.learning_rate
 
     graph = tf.Graph()
     with graph.as_default():
@@ -103,7 +104,7 @@ def run_training(input_data):
             feed_dict = {tf_train_dataset: batch_data, tf_train_labels: batch_labels, keep_prob: 0.5}
             _, l, predictions = session.run(
                 [optimizer,loss,train_prediction], feed_dict=feed_dict)
-            if (step % 500 == 0):
+            if (step % 5000 == 0):
                 v_e = error(
                     valid_prediction.eval(
                         {tf_valid_dataset: valid_dataset, keep_prob: 1.0}
