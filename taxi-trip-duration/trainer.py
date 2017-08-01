@@ -47,8 +47,8 @@ def run_training(input_data):
     print('Training set', train_dataset.shape, train_labels.shape)
     print('Validation set', valid_dataset.shape, valid_labels.shape)
 
-    n_nodes_hl1 = 2048
-    n_nodes_hl2 = 2048
+    n_nodes_hl1 = 2000
+    n_nodes_hl2 = 2000
 
     batch_size = 100
     learning_rate = FLAGS.learning_rate
