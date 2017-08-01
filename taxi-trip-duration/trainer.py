@@ -110,7 +110,7 @@ def run_training(input_data):
                         {tf_valid_dataset: valid_dataset, keep_prob: 1.0}
                     ), valid_labels)
                 print("Minibatch loss at step %d: %f" % (step, l))
-                print("Validation error: %.5f" % v_e)
+                print("Validation error: %.4f" % v_e)
                 itera.append(step)
                 v_er_list.append(v_e)
             step += 1
@@ -119,7 +119,7 @@ def run_training(input_data):
                     valid_prediction.eval(
                         {tf_valid_dataset: valid_dataset, keep_prob: 1.0}
                     ), valid_labels)
-                print("Final Validation error: %.5f" % v_e)
+                print("Final Validation error: %.4f" % v_e)
 
         saver = tf.train.Saver()
         checkpoint_file = os.path.join(FLAGS.output_dir, 'checkpoint-{}'.format(input_data))
