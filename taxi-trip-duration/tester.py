@@ -44,7 +44,7 @@ def run_testing(input_test_data):
 
     for i in range(len(test_dataset)):
         result = session.run(test_prediction_one,feed_dict={tf_test_one:test_dataset[i],keep_prob: 1.0})
-        if i % 5000==0:
+        if i % 500==0:
             print(float(i)/len(test_dataset)*100,'%')
         submission[i].append(result[0][0])
 
