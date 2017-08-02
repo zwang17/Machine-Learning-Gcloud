@@ -3,8 +3,6 @@ import tensorflow as tf
 from six.moves import cPickle as pickle
 import numpy as np
 from tensorflow.python.lib.io import file_io
-### External Parameters:
-### input_dir,output_dir,train_steps
 
 flags = tf.app.flags
 FLAGS = flags.FLAGS
