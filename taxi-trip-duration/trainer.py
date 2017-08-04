@@ -11,6 +11,7 @@ flags.DEFINE_string('output_dir','output','Output Directory.')
 flags.DEFINE_string('input_train_data','train_data','Input Training Data File Name.')
 flags.DEFINE_integer('train_steps', 100000, 'Train Steps.')
 flags.DEFINE_integer('learning_rate', 0.00001, 'Training Learning Rate.')
+flags.DEFINE_integer('hidden_layer_size', 2000, 'Size of Hidden Layers in the Neural Network.')
 
 def run_training(input_data):
     pickle_file = os.path.join(FLAGS.input_dir, input_data)

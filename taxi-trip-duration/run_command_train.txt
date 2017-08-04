@@ -9,3 +9,4 @@ gcloud ml-engine jobs submit training ${JOB_NAME} \
 --output_dir $OUTPUT_PATH \
 --input_train_data $INPUT_DATA \
 --train_steps $TRAIN_STEPS \
+--hidden_layer_size $LAYER_SIZE
