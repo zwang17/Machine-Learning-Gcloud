@@ -71,7 +71,7 @@ def run_training(input_data):
     print(test_data.shape)
 
 
-    weight = [1.000]*13
+    weight = [1.000]*len(train_data[0])
     num_round = FLAGS.num_rounds
     step = 0.02
     learning_rate = FLAGS.learning_rate
