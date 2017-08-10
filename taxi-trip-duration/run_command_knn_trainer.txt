@@ -1,12 +1,11 @@
 gcloud ml-engine jobs submit training ${JOB_NAME} \
 --package-path taxi-trip-duration/ \
 --staging-bucket $STAGING_BUCKET \
---module-name taxi-trip-duration.trainer \
+--module-name taxi-trip-duration.knn_trainer \
 --region $REGION \
---scale-tier BASIC_GPU \
+--scale-tier $MACHINE \
 -- \
 --input_dir $INPUT_PATH \
---output_dir $OUTPUT_PATH \
 --input_train_data $INPUT_DATA \
---train_steps $TRAIN_STEPS \
---hidden_layer_size $LAYER_SIZE
+--num_rounds $NUM_ROUNDS \
+--learning_rate $LEARNING_RATE
