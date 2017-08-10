@@ -72,7 +72,7 @@ def run_training(input_data):
 
 
     weight = [1.000]*13
-    num_round = FLAGS.train_steps
+    num_round = FLAGS.num_rounds
     step = 0.02
     learning_rate = FLAGS.learning_rate
     num_parameters = len(weight)
