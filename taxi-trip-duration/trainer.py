@@ -11,7 +11,7 @@ flags.DEFINE_string('output_dir','output','Output Directory.')
 flags.DEFINE_string('input_train_data','train_data','Input Training Data File Name.')
 flags.DEFINE_integer('train_steps', 100000, 'Train Steps.')
 flags.DEFINE_integer('learning_rate', 0.00001, 'Training Learning Rate.')
-flags.DEFINE_integer('hidden_layer_size', 2000, 'Size of Hidden Layers in the Neural Network.')
+flags.DEFINE_integer('hidden_layer_size', 1024, 'Size of Hidden Layers in the Neural Network.')
 
 def run_training(input_data):
     pickle_file = os.path.join(FLAGS.input_dir, input_data)
@@ -46,8 +46,8 @@ def run_training(input_data):
     print('Training set', train_dataset.shape, train_labels.shape)
     print('Validation set', valid_dataset.shape, valid_labels.shape)
 
-    n_nodes_hl1 = 2048
-    n_nodes_hl2 = 2048
+    n_nodes_hl1 = FLAGS.hidden_layer_size
+    n_nodes_hl2 = FLAGS.hidden_layer_size
 
     batch_size = 100
     learning_rate = FLAGS.learning_rate
