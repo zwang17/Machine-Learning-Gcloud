@@ -51,31 +51,31 @@ def run_training(input_data):
 
     def weight_normalize():
         sum = 0
-        for i in weight: sum+=i
-        for i in range(len(weight)): weight[i] = weight[i]/sum * 100
+        for i in weight: sum += i
+        for i in range(len(weight)): weight[i] = weight[i] / sum * 100
 
     with file_io.FileIO(pickle_file, 'r') as f:
         save = pickle.load(f)
         train_dataset, train_labels, valid_dataset, valid_labels = save['train_dataset'], save['train_labels'], save[
             'valid_dataset'], save['valid_labels']
 
-    X = np.concatenate((train_dataset,valid_dataset))
-    Y = np.concatenate((train_labels,valid_labels))
+    X = np.concatenate((train_dataset, valid_dataset))
+    Y = np.concatenate((train_labels, valid_labels))
     print(X.shape)
     print(Y.shape)
     mini_batch_size = 80
     test_choice = np.random.choice(X.shape[0], mini_batch_size, replace=False)
-    test_data, test_label = X[test_choice,:], Y[test_choice,:]
-    train_choice = np.delete(range(X.shape[0]),test_choice)
-    train_data, train_label = X[train_choice,:], Y[train_choice,:]
+    test_data, test_label = X[test_choice, :], Y[test_choice, :]
+    train_choice = np.delete(range(X.shape[0]), test_choice)
+    train_data, train_label = X[train_choice, :], Y[train_choice, :]
     print('Partitioned')
     print(train_data.shape)
     print(test_data.shape)
 
-    weight = [1.000]*len(train_data[0])
-    num_round = FLAGS.num_rounds
+    weight = [1.000] * 13
+    num_round = 51
     step = 0.02
-    learning_rate = FLAGS.learning_rate
+    learning_rate = 3
     num_parameters = len(weight)
     round_list = []
     loss_list = []
@@ -90,6 +90,8 @@ def run_training(input_data):
         # print('Initial loss: {}'.format(getLoss(type='mse')))
         for k in range(num_parameters):
             print("Looking for gradient on parameter {}".format(k))
+            direction = 0
+            amount = 0
             weight[k] = weight[k] + step
             right_loss = getLoss(type='mse')
             weight[k] = weight[k] - 2 * step
@@ -109,14 +111,14 @@ def run_training(input_data):
         print('round:', i, ', current weight:', ['%.4f' % elem for elem in weight])
         if i % 10 == 0:
             knn = neighbors.KNeighborsRegressor(weights='distance', n_neighbors=20, metric=lambda x, y: mydist(x, y))
-            knn.fit(train_dataset,train_labels)
+            knn.fit(train_dataset, train_labels)
             predict = knn.predict(valid_dataset)
-            loss = error(predict,valid_labels)
+            loss = error(predict, valid_labels)
             round_list.append(i)
             loss_list.append(loss)
             weight_list.append(weight)
-            print('Test Loss at round {}: {}'.format(i,loss))
-    print('final weight:',weight)
+            print('Test Loss at round {}: {}'.format(i, loss))
+    print('final weight:', weight)
 
 def main(_):
     run_training(FLAGS.input_train_data)
