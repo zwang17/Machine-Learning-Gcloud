@@ -1,6 +1,7 @@
 import os.path
 from sklearn import neighbors
 import numpy as np
+import tensorflow as tf
 from six.moves import cPickle as pickle
 import pandas as pd
 from tensorflow.python.lib.io import file_io

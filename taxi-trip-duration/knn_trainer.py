@@ -3,6 +3,7 @@ from sklearn import neighbors
 import numpy as np
 from six.moves import cPickle as pickle
 import pandas as pd
+import tensorflow as tf
 from tensorflow.python.lib.io import file_io
 
 flags = tf.app.flags
