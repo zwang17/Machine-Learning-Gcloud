@@ -15,15 +15,17 @@ flags.DEFINE_integer('learning_rate', 1, 'Training Learning Rate.')
 
 def run_training(input_data):
     pickle_file = os.path.join(FLAGS.input_dir, input_data)
-    def mydist(x,y):
-        x,y = np.asarray(x),np.asarray(y)
-        return np.dot((x-y)**2,weight)
+
+    def mydist(x, y):
+        x, y = np.asarray(x), np.asarray(y)
+        return np.dot((x - y) ** 2, weight)
 
     def mse(predictions, labels):
         sum = 0.0
         for i in range(len(predictions)):
-            sum = sum + (predictions[i][0]-labels[i][0])**2
+            sum = sum + (predictions[i][0] - labels[i][0]) ** 2
         return (sum / len(predictions)) ** 0.5
+
     def error(predictions, labels):
         sum = 0.0
         for x in range(len(predictions)):
@@ -33,8 +35,8 @@ def run_training(input_data):
         return (sum / len(predictions)) ** 0.5
 
     def batch_refresh():
-        global test_data,test_label,train_data,train_label
-        new_choice = np.random.choice(X.shape[0],mini_batch_size,replace=False)
+        global test_data, test_label, train_data, train_label
+        new_choice = np.random.choice(X.shape[0], mini_batch_size, replace=False)
         test_data, test_label = X[new_choice, :], Y[new_choice, :]
         train_choice = np.delete(range(X.shape[0]), new_choice)
         train_data, train_label = X[train_choice, :], Y[train_choice, :]
@@ -44,8 +46,8 @@ def run_training(input_data):
         knn.fit(train_data, train_label)
         predict = knn.predict(test_data)
         if type == 'mse':
-            return mse(predict,test_label)
-        return error(predict,test_label)
+            return mse(predict, test_label)
+        return error(predict, test_label)
 
     def weight_normalize():
         sum = 0
@@ -69,7 +71,6 @@ def run_training(input_data):
     print('Partitioned')
     print(train_data.shape)
     print(test_data.shape)
-
 
     weight = [1.000]*len(train_data[0])
     num_round = FLAGS.num_rounds
